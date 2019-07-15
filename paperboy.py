@@ -1,10 +1,10 @@
 class PaperBoy():
 	#name, experience, earnings
 
-    def __init__(self, name, experience, earnings):
+    def __init__(self, name):
         self.name = name
-        self.experience = experience
-        self.earnings = earnings
+        self.experience = 0
+        self.earnings = 0
 
     def __str__(self):
         return f'PaperBoy instance:name={self.name} experience={self.experience} earnings={self.earnings}'
@@ -19,11 +19,38 @@ class PaperBoy():
     def deliver(self, start_address, end_address):
         quota = self.quota()
 
+        self.experience += (end_address - start_address)
+
+        # self.earnings += self.experience
 
 
-        self.earnings += (end_address - start_address) 
+        if (self.experience < quota):
+            print('not enoguh!')
+            print(self.experience)
+            print(quota)
+            pass
+        else:
+            self.earnings += ((self.experience - quota) * .5) + (quota * .25)
+
+
+            
+            
+            
+            
+            print('Thats good!')
+            print(self.experience)
+            print(quota)
+            # self.earnings += self.experience * .25
+
+
+            
+
+
+
         
-        return earnings
+        return self.earnings
+
+
 
     def report(self):
         pass
@@ -37,5 +64,17 @@ class PaperBoy():
         #Run 2, quota = 50 + (.5 * papers delivered before)
 
 
-johnny = PaperBoy('Johnny', 0, 0)
-print(johnny)
+# johnny = PaperBoy('Johnny', 0, 0)
+# print(johnny.quota())
+# print(johnny.quota())
+# print(johnny.deliver(42, 45))
+
+# print(johnny)
+
+
+
+tommy = PaperBoy('Tommy')
+print(tommy.quota()) #50
+print(tommy.deliver(100, 160)) #17.5
+
+print(tommy)
